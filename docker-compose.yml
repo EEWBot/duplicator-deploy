@@ -1,6 +1,6 @@
 services:
   duplicator:
-    image: ghcr.io/eewbot/http-request-duplicator:0.3.1
+    image: ghcr.io/eewbot/http-request-duplicator:0.4.1
     hostname: duplicator
     container_name: duplicator__duplicator
 
