@@ -1,0 +1,40 @@
+services:
+  duplicator:
+    image: ghcr.io/eewbot/http-request-duplicator:0.3.1
+    hostname: duplicator
+    container_name: duplicator__duplicator
+
+    restart: unless-stopped
+
+    deploy:
+      resources:
+        limits:
+          memory: 512m
+
+    networks:
+      - default
+
+  cloudflared:
+    image: cloudflare/cloudflared:v2024.6.1
+    hostname: cloudflared
+    container_name: duplicator__cloudflared
+
+    restart: unless-stopped
+
+    environment:
+      TUNNEL_LOGFILE: /dev/stdout
+
+    command: tunnel run --token ${TUNNEL_TOKEN}
+    user: root
+
+    deploy:
+      resources:
+        limits:
+          memory: 128m
+
+    networks:
+      default:
+
+networks:
+  default:
+    name: duplicator__default
