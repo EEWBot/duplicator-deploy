@@ -1,10 +1,13 @@
 services:
   duplicator:
-    image: ghcr.io/eewbot/http-request-duplicator:0.3.1
+    image: ghcr.io/eewbot/http-request-duplicator:0.4.1
     hostname: duplicator
     container_name: duplicator__duplicator
 
     restart: unless-stopped
+
+    environment:
+      LISTEN: "0.0.0.0:8001"
 
     deploy:
       resources:
@@ -15,7 +18,7 @@ services:
       - default
 
   cloudflared:
-    image: cloudflare/cloudflared:v2024.6.1
+    image: cloudflare/cloudflared:2024.6.1
     hostname: cloudflared
     container_name: duplicator__cloudflared
 
